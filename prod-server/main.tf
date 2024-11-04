@@ -9,3 +9,18 @@ resource "aws_instance" "prod-server" {
     private_key = file("./jenkinskey.pem")
     host     = self.public_ip
   }
+ provisioner "local-exec" {
+
+        command = " echo ${aws_instance.prod-server.public_ip} > inventory "
+ }
+ 
+ provisioner "local-exec" {
+ command = "ansible-playbook /var/lib/jenkins/workspace/Banking-website/prod-server/prod-bank-playbook.yml "
+  } 
+}
+
+output "prod-server_public_ip" {
+
+  value = aws_instance.prod-server.public_ip
+  
+}
