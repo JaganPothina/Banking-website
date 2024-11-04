@@ -9,6 +9,12 @@ resource "aws_instance" "prod-server" {
     private_key = file("./jenkinskey.pem")
     host     = self.public_ip
   }
+  provisioner "remote-exec" {
+    inline = [ "echo 'wait to start instance' "]
+  }
+  tags = {
+    Name = "prod-server"
+  }
  provisioner "local-exec" {
 
         command = " echo ${aws_instance.prod-server.public_ip} > inventory "
