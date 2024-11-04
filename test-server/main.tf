@@ -13,3 +13,18 @@ resource "aws_instance" "test-server" {
     private_key = file("./jenkinskey.pem")
     host     = self.public_ip
   }
+ provisioner "local-exec" {
+
+        command = " echo ${aws_instance.test-server.public_ip} > inventory "
+ }
+ 
+ provisioner "local-exec" {
+ command = "ansible-playbook /var/lib/jenkins/workspace/project-02-banking/test-server/test-bank-playbook.yml "
+  } 
+}
+
+output "test-server_public_ip" {
+
+  value = aws_eip_association.eip_assoc.public_ip
+  
+}
