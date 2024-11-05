@@ -13,13 +13,19 @@ resource "aws_instance" "test-server" {
     private_key = file("./jenkinskey.pem")
     host     = self.public_ip
   }
+ provisioner "remote-exec" {
+    inline = [ "echo 'wait to start instance' "]
+  }
+  tags = {
+    Name = "test-server"
+  }
  provisioner "local-exec" {
 
         command = " echo ${aws_instance.test-server.public_ip} > inventory "
  }
  
  provisioner "local-exec" {
- command = "ansible-playbook /var/lib/jenkins/workspace/project-02-banking/test-server/test-bank-playbook.yml "
+ command = "ansible-playbook /var/lib/jenkins/workspace/Banking-website/test-server/test-bank-playbook.yml "
   } 
 }
 
