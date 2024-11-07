@@ -20,6 +20,12 @@ pipeline {
                 }
         }
 
+        stage('Publish HTML') {
+              steps {
+                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/pipelineforbanking/target/surefire-reports', reportFiles: 'index.html', reportName: 'project-02-HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+                }
+        }
+
         stage('Docker build image') {
               steps {
                   
