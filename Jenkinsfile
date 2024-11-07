@@ -63,6 +63,31 @@ pipeline {
                            
                 }
             }
+        
+         stage('Selenium test') {
+              steps {
+                  
+                  sh 'sudo java -jar seleniumbank.jar'
+                  sh"echo 'application is logged in succussfully done' "
+                           
+                }
+            }
+          
+         stage ('setting Prod-Server with terraform and ansible'){
+            steps{
+                
+                dir('prod-server'){
+                sh 'chmod 600 DEMOKEY.pem'
+                sh'terraform init'
+                sh'terraform validate'
+                sh'terraform apply --auto-approve'
+            }
+        }
+         }
+
+        
+    }
+
        
 
 
