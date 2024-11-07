@@ -1,5 +1,6 @@
-### Banking and Financial Domain Project ###
+# Banking and Financial Domain Project #
 **Author** : P.Jagan Mohan
+
 **GitHub** : https://github.com/JaganPothina/Banking-website
 ## Application preview ##
 Here's a screenshot of the banking application deployed on the production server:
